@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+#import sys
 import nltk
 
 pos_tweets = []
@@ -63,15 +64,15 @@ def apprentissage(string_a_tester):
         append_pos = open('positive.txt','a')
         append_neg = open('negative.txt','a')
         print (string_a_tester + " semble " + result)
-        verif = raw_input("Comment est le texte? P(positif)/N(négatif)/I(inclassable)")
+        verif = input("Comment est le texte? P(positif)/N(négatif)/I(inclassable)")
         if str(verif)=="p":
             print ("texte positif")
-            append_pos.write(string_a_tester)
             append_neg.write('\n')
+            append_pos.write(string_a_tester)
         elif str(verif)=="n":
             print ("texte negatif")
-            append_neg.write(string_a_tester)
             append_neg.write('\n')
+            append_neg.write(string_a_tester)
         else:
             print ("texte passé")
         append_pos.close()
