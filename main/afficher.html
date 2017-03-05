@@ -1,52 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>Les avis Twitter de Jean-Luc Mélenchon</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body>
-        <canvas id="myChart" width="400" height="400"></canvas>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-        <script type="text/javascript">
-            $.getJSON('ressource/tweets.json', function(tweets) {
-                // For a pie chart
-                var positive = tweets.filter(function(value) { return value.sentiment === "positive" }).length;
-                var neutre = tweets.filter(function(value) { return value.sentiment === "neutre" }).length;
-                var negative = tweets.filter(function(value) { return value.sentiment === "negative" }).length;
-                console.log(positive)
-                var data = {
-                    labels: [
-                        "Positif",
-                        "Neutre",
-                        "Negatif"
-                    ],
-                    datasets: [
-                        {
-                            data: [positive, neutre, negative],
-                            backgroundColor: [
-                                "#FF6384",
-                                "#36A2EB",
-                                "#FFCE56"
-                            ],
-                            hoverBackgroundColor: [
-                                "#FF6384",
-                                "#36A2EB",
-                                "#FFCE56"
-                            ]
-                        }]
-                };
-                var myPieChart = new Chart($("canvas#myChart"),{
-                    type: 'pie',
-                    data: data,
-                    options: {
-                        animation:{
-                            animateScale:true
-                        }
-                    }
-                });
-            });
-        </script>
+	    <div class="container">
+	    	<div class="row">
+	    		<center>
+	    			<h1>Les avis Twitter de Jean-Luc Mélenchon</h1>
+	    			<p>Le cammenbert suivant récapitule le nombre d'avis positifs, négatifs et neutres que le candidat Jean-Luc Mélenchon reçoit sur twitter.</p>
+	    			<p>(Si le cammenbert ne s'affiche pas, ouvrez la page avec <b>Mozilla Firefox</b>)</p>
+        			<canvas id="myChart" width="400" height="400"></canvas>
+        			<hr>
+        			<p>DE LAERE Antoine - FARNIER Clément - LAURET Bruno - MARTIN Thibaut</p>
+        			<p>INFO901 TP - Fouilles de données</p>
+	    		</center>
+	    	</div>
+	    </div>
+
+		<footer>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	        <script type="text/javascript">
+	            $.getJSON('ressource/tweets.json', function(tweets) {
+	                // For a pie chart
+	                var positive = tweets.filter(function(value) { return value.sentiment === "positive" }).length;
+	                var neutre = tweets.filter(function(value) { return value.sentiment === "neutre" }).length;
+	                var negative = tweets.filter(function(value) { return value.sentiment === "negative" }).length;
+	                console.log(positive)
+	                var data = {
+	                    labels: [
+	                        "Positif",
+	                        "Neutre",
+	                        "Negatif"
+	                    ],
+	                    datasets: [
+	                        {
+	                            data: [positive, neutre, negative],
+	                            backgroundColor: [
+	                                "#FF6384",
+	                                "#36A2EB",
+	                                "#FFCE56"
+	                            ],
+	                            hoverBackgroundColor: [
+	                                "#FF6384",
+	                                "#36A2EB",
+	                                "#FFCE56"
+	                            ]
+	                        }]
+	                };
+	                var myPieChart = new Chart($("canvas#myChart"),{
+	                    type: 'pie',
+	                    data: data,
+	                    options: {
+	                    	responsive: false,
+							maintainAspectRatio: false,
+	                        animation:{
+	                            animateScale:true
+	                        }
+	                    }
+	                });
+	            });
+	        </script>
+	        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		</footer>    	
     </body>
 </html>
