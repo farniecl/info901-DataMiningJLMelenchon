@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 
 #Import des methodes depuis la bibliothèque tweepy
+import sys, getopt, json, os, time
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
-import time
-import os
-import json
 from pprint import pprint
 from twitter.stream_tweet import StreamTweet
 from twitter.classifieur import Classifieur
@@ -29,7 +27,7 @@ def stream_tweets(tweets):
     consumer_key = "Xsd9vLsEmQLqqswUrt0fTOYun"
     consumer_secret = "kIinFrugN04pqNG2DfonwAylbzNmjzFpGVAdwBDxEca1S975Q2"
     #This handles Twitter authetification and the connection to Twitter Streaming API
-    l = StreamTweet(time_limit=20)
+    l = StreamTweet(time_limit=600)
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
@@ -38,14 +36,34 @@ def stream_tweets(tweets):
     tweets.extend(l.get_tweets())
 
 def pos_neg_app(tweets):
-    cl = Classifieur('./ressource/tweets.json')
+    cl = Classifieur(json_file)
     for tweet in tweets:
         tweet["sentiment"] = cl.apprentissage(tweet["tweet"])
 
 def pos_neg_ana(tweets):
-    cl = Classifieur('./ressource/tweets.json')
+    cl = Classifieur(json_file)
     for tweet in tweets:
         tweet["sentiment"] = cl.analyse(tweet["tweet"])
+
+def main(argv):
+   #inputfile = ''
+   #outputfile = ''
+   #try:
+   #   opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
+   #except getopt.GetoptError:
+   #   print 'test.py -i <inputfile> -o <outputfile>'
+   #   sys.exit(2)
+   #for opt, arg in opts:
+   #   if opt == '-h':
+   #      print 'test.py -i <inputfile> -o <outputfile>'
+   #      sys.exit()
+   #   elif opt in ("-i", "--ifile"):
+   #      inputfile = arg
+   #   elif opt in ("-o", "--ofile"):
+   #      outputfile = arg
+   #print 'Input file is "', inputfile
+   print('Output file is ')
+   
 
 if __name__ == '__main__':
     tweets = []

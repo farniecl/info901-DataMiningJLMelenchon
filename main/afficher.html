@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script type="text/javascript">
+            $.getJSON('ressource/tweets.json', function(tweets) {
+                // For a pie chart
+                var positive = tweets.filter(function(value) { return value.sentiment === "positive" }).length;
+                var neutre = tweets.filter(function(value) { return value.sentiment === "neutre" }).length;
+                var negative = tweets.filter(function(value) { return value.sentiment === "negative" }).length;
+                console.log(positive)
+                var data = {
+                    labels: [
+                        "Positif",
+                        "Neutre",
+                        "Negatif"
+                    ],
+                    datasets: [
+                        {
+                            data: [positive, neutre, negative],
+                            backgroundColor: [
+                                "#FF6384",
+                                "#36A2EB",
+                                "#FFCE56"
+                            ],
+                            hoverBackgroundColor: [
+                                "#FF6384",
+                                "#36A2EB",
+                                "#FFCE56"
+                            ]
+                        }]
+                };
+                var myPieChart = new Chart($("canvas#myChart"),{
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        animation:{
+                            animateScale:true
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
