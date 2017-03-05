@@ -1,0 +1,103 @@
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Data displayer</h1>
+</br>
+<p> Afin d'afficher correctement les résultats, merci de selectionner le fichier result.txt dans le formulaire</p>
+</br>
+</br>
+<input type="file" name="file" id="file">
+</br>
+</br>
+</br>
+
+<div id="contain_svg">
+
+</div>
+
+<script>
+document.getElementById('file').onchange = function(){
+	document.getElementById('contain_svg').innerHTML = "";
+	var file = this.files[0];
+
+	var reader = new FileReader();
+	reader.onload = function(progressEvent){
+
+    // By lines
+    var lines = this.result.split('\r\n');
+    for(var line = 0; line < lines.length; line++){
+		var linecontent=lines[line].split(' ');
+		switch(linecontent[0]) {
+			case "theme":
+				var  newRectsize = linecontent[2].toString();
+				
+				var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+				svg.setAttribute('width','100%');
+				svg.setAttribute('height','200');
+				
+				var theme_text = document.createElementNS("http://www.w3.org/2000/svg",'text'); //Create a path in SVG's namespace
+				theme_text.setAttribute("x",'40%');
+				theme_text.setAttribute('y','50%');
+				theme_text.setAttribute('font-family','Verdana');
+				theme_text.setAttribute('font-size', '50');
+				theme_text.setAttribute('fill','black');
+				theme_text.textContent = linecontent[1].toString();		
+				svg.appendChild(theme_text);
+			
+			
+				var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect'); //Create a path in SVG's namespace
+				rect.setAttribute('x',0);
+				rect.setAttribute('y',"85%");
+				rect.setAttribute('width','100%');
+				rect.setAttribute('height','10%');
+				rect.setAttribute('fill','rgb(255,0,0)');
+				svg.appendChild(rect);
+				
+				var  newRectsize = linecontent[2].toString();
+				
+				var rect2 = document.createElementNS("http://www.w3.org/2000/svg", 'rect'); //Create a path in SVG's namespace
+				rect2.setAttribute('x',0);
+				rect2.setAttribute('y',"85%");
+				rect2.setAttribute('height','10%');
+				rect2.setAttribute('width', newRectsize.concat("%"));
+				rect2.setAttribute('fill','rgb(0,255,0)');				
+				svg.appendChild(rect2);
+				
+				var negative_size=100-linecontent[2];
+				
+				var rect_text = document.createElementNS("http://www.w3.org/2000/svg", 'text'); //Create a path in SVG's namespace
+				rect_text.setAttribute("x", (parseInt(linecontent[2]/2)-10).toString().concat("%"));
+				rect_text.setAttribute('y','80%');
+				rect_text.setAttribute('font-family','Verdana');
+				rect_text.setAttribute('font-size', '35');
+				rect_text.setAttribute('fill','black');
+				rect_text.textContent = newRectsize.concat("%").concat(" d'avis positif");		
+				svg.appendChild(rect_text);
+				
+				
+				
+				var rect_text2 = document.createElementNS("http://www.w3.org/2000/svg", 'text'); //Create a path in SVG's namespace
+				rect_text2.setAttribute("x", (parseInt(linecontent[2])+parseInt((negative_size/2))-10).toString().concat("%"));
+				rect_text2.setAttribute('y','80%');
+				rect_text2.setAttribute('font-family','Verdana');
+				rect_text2.setAttribute('font-size', '35');
+				rect_text2.setAttribute('fill','black');
+				rect_text2.textContent = negative_size.toString().concat("%").concat(" d'avis negatif");		
+				svg.appendChild(rect_text2);
+				
+				document.getElementById('contain_svg').appendChild(svg);
+				break;
+			default:
+				console.log("erreur sur lecture bloc note");
+		}
+    }
+  };
+  reader.readAsText(file);
+};
+
+</script>
+</body>
+</html>

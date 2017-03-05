@@ -1,0 +1,14 @@
+[
+    {
+        "tweet":"@benoithamon Vous ne soyez pas capable de d\u00e9passer cet appareil d\u00e9suet qu'est le PS pour construire autre chose avec @JLMelenchon",
+        "sentiment":"positive"
+    },
+    {
+        "tweet":"RT @LeLapinTaquin: Sur BFMTV le porte-parole de @JLMelenchon dit que Macron et Le Pen ont le m\u00eame programme \"lib\u00e9ral\". Je. Bon... voil\u00e0 quo\u2026",
+        "sentiment":"neutre"
+    },
+    {
+        "tweet":"RT @benoitheylens: @JLMelenchon @jlm_2017 Je suppose que @France2tv ne pr\u00e9sentera pas d'excuses pour diffamation d'accuser jlm d'\u00eatre\u2026 ",
+        "sentiment":"positive"
+    }
+]
